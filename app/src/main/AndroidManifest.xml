@@ -10,7 +10,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Design.NoActionBar"
+        android:theme="@style/Theme.Design.Light.NoActionBar"
         tools:targetApi="31">
         <activity
             android:name=".UI.Users.HomeActivity"
@@ -18,16 +18,13 @@
             android:label="@string/title_activity_home"
             android:theme="@style/Theme.Swipe_hatoms" />
         <activity
-            android:name=".UI.RegisterActivity"
+            android:name=".bottomnav.chats.ChatsFragment"
             android:exported="false" />
         <activity
-            android:name=".UI.Users.settings"
+            android:name=".bottomnav.main.MainFragment"
             android:exported="false" />
         <activity
-            android:name=".UI.LoginActivity"
-            android:exported="false" />
-        <activity
-            android:name=".bottomnav.chats.ChatActivity"
+            android:name=".bottomnav.profile.ProfileFragment"
             android:exported="false" />
         <activity
             android:name=".UI.Users.MainActivity"

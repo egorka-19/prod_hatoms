@@ -20,16 +20,6 @@ public class ChatsFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = FragmentChatsBinding.inflate(inflater, container, false);
         FragmentChatsBinding.inflate(inflater, container, false);
-        binding.nextButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent homeIntent = new Intent(ChatsFragment.this.getActivity(), ChatActivity.class);
-                startActivity(homeIntent);
-            }
-        });
-
-
-
         return binding.getRoot();
     }
 }

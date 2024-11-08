@@ -21,7 +21,6 @@ public class MainFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = FragmentMainBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
-        phone = requireActivity().getIntent().getStringExtra("phone");
 
         return view;
     }
