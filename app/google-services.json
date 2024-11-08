@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "483853438409",
+    "project_id": "prod-a2515",
+    "storage_bucket": "prod-a2515.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:483853438409:android:417e7b3576c03c247f6c18",
+        "android_client_info": {
+          "package_name": "com.hatoms.prod"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBRTNefqPeud3eBOGMrNeAcMmBY4nA-_V4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
