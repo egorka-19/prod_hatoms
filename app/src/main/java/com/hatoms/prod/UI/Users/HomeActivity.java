@@ -29,7 +29,6 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         Intent intent = getIntent();
-        System.out.println("home" + intent.getStringExtra("phone"));
 
 
         getSupportFragmentManager().beginTransaction().replace(binding.fragmentContainer.getId(), new MainFragment()).commit();
