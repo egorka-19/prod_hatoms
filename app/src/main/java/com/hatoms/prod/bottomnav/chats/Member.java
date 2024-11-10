@@ -2,18 +2,19 @@ package com.hatoms.prod.bottomnav.chats;
 
 public class Member {
     private String name;
-    private String dolg;
+    private String debt;
 
-    public Member(String name, String dolg) {
+    public Member(String name, String debt) {
         this.name = name;
-        this.dolg = dolg;
+        this.debt = debt;
     }
 
     public String getName() {
         return name;
     }
 
-    public String getDolg() {
-        return dolg;
+    public String getDebt() {
+        return debt;
     }
 }
+

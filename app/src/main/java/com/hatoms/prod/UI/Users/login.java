@@ -3,6 +3,7 @@ package com.hatoms.prod.UI.Users;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -21,7 +22,7 @@ public class login extends AppCompatActivity {
     private static final String TAG = "login";
     private EditText mailEditText;
     private EditText passwordEditText;
-    private ImageButton loginButton; // Добавим кнопку для запуска авторизации
+    private ImageButton loginButton, register; // Добавим кнопку для запуска авторизации
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,10 +33,17 @@ public class login extends AppCompatActivity {
         mailEditText = findViewById(R.id.mail);
         passwordEditText = findViewById(R.id.password);
         loginButton = findViewById(R.id.sign_button); // Предположим, что в XML есть кнопка login_button
-
+        register = findViewById(R.id.register);
+        register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(login.this, activity_register.class);
+                startActivity(intent);
+            }
+        });
         // Инициализация Retrofit
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.113.168:8080/") // Укажите базовый URL
+                .baseUrl("http://89.169.160.159:8080") // Укажите базовый URL
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 

@@ -1,5 +1,6 @@
 package com.hatoms.prod.bottomnav.chats;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -20,11 +21,18 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.hatoms.prod.R;
+import com.hatoms.prod.UI.Users.ApiService;
 import com.hatoms.prod.databinding.FragmentChatsBinding;
+import com.google.gson.Gson;
+import com.hatoms.prod.network.RetrofitClient;
 
 import java.util.ArrayList;
 import java.util.List;
-import com.google.gson.Gson;
+import java.util.stream.Collectors;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ChatsFragment extends Fragment {
 
@@ -42,7 +50,6 @@ public class ChatsFragment extends Fragment {
         binding.addMember.setOnClickListener(v -> add_member());
         binding.continueButton.setOnClickListener(v -> addParticipant());
         binding.saveButton.setOnClickListener(v -> saveData(oneTimeCheckBox.isChecked()));
-
 
         return binding.getRoot();
     }
@@ -119,27 +126,57 @@ public class ChatsFragment extends Fragment {
         if (accountName.isEmpty() || accountCoast.isEmpty()) {
             Toast.makeText(getContext(), "Пожалуйста, заполните все поля счета", Toast.LENGTH_SHORT).show();
         } else {
-            SharedPreferences sharedPreferences = requireActivity().getSharedPreferences("accountData", getContext().MODE_PRIVATE);
+            SharedPreferences sharedPreferences = requireActivity().getSharedPreferences("accountData", Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putString("accountName", accountName);
             editor.putString("accountCoast", accountCoast);
 
-            // Сохранение списка участников с помощью Gson
             Gson gson = new Gson();
             String membersJson = gson.toJson(membersList);
-            editor.putString("membersList", membersJson);
+            editor.putString("all_members", membersJson);
             editor.apply();
+
             Toast.makeText(getContext(), "Сохранено!", Toast.LENGTH_SHORT).show();
 
-            if (odnor) {
-                Intent intent = new Intent(requireActivity(), page_sob.class);
-                startActivity(intent);
-            } else {
-                Intent intent = new Intent(requireActivity(), add_cost.class);
-                startActivity(intent);
-            }
+            // Получаем userID из SharedPreferences с именем "id_uniq"
+            int userID = requireActivity()
+                    .getSharedPreferences("accountData", Context.MODE_PRIVATE)
+                    .getInt("id_uniq", -1);
+
+            // Подготовка данных для отправки на сервер
+            List<String> emails = membersList.stream()
+                    .map(Member::getName) // Предполагаем, что email хранится в поле `name`
+                    .collect(Collectors.toList());
+
+            MemberRequest memberRequest = new MemberRequest();
+            memberRequest.setUserId(userID); // Устанавливаем реальный userId
+            memberRequest.setTitle(accountName);
+            memberRequest.setAmount(Integer.parseInt(accountCoast));
+            memberRequest.setEmails(emails);
+
+            // Отправка данных на сервер
+            ApiService apiService = RetrofitClient.getApiService();
+            apiService.sendMemberData(memberRequest).enqueue(new Callback<Void>() {
+                @Override
+                public void onResponse(Call<Void> call, Response<Void> response) {
+                    if (response.isSuccessful()) {
+                        Toast.makeText(getContext(), "Данные успешно отправлены!", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(getContext(), "Ошибка отправки данных", Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<Void> call, Throwable t) {
+                    Toast.makeText(getContext(), "Не удалось отправить данные: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
+
+            Intent intent = new Intent(requireActivity(), page_sob.class);
+            startActivity(intent);
         }
     }
+
 
     private void logMembersJson() {
         Gson gson = new Gson();
