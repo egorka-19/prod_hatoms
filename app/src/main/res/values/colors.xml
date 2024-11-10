@@ -4,6 +4,7 @@
     <color name="colorPrimaryDark">#AF009A</color>
     <color name="light_grey">#F8F8F8</color>
     <color name="black">#000</color>
+    <color name="white">#FFFFFF</color>
     <color name="color_main_BG">#F0F7FA</color>
     <color name="color_btn">#00A775</color>
     <color name="light_green">#E4F6F1</color>

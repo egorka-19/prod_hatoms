@@ -2,24 +2,17 @@ package com.hatoms.prod.UI.Users;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
-import android.text.TextUtils;
-import android.widget.Toast;
+import android.preference.PreferenceManager;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-
 import com.hatoms.prod.R;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.hatoms.prod.bottomnav.main.MainFragment;
-
-import io.paperdb.Paper;
 
 public class MainActivity extends AppCompatActivity {
     private ProgressDialog loadingBar;
@@ -28,17 +21,36 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         loadingBar = new ProgressDialog(this);
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                Intent i = new Intent(MainActivity.this, HomeActivity.class);
-                startActivity(i);
-                finish();
 
-            }
-        }, 1 * 1000); // Когда будем делать анимацию, если вообще будем, то надо учесть то, что по времени должно быть в идеале 1 секунда, иначе когда
-        // делаешь больше, то ломается чекбокс запомни меня
-
+        // Получаем значение result из SharedPreferences
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        int result = sharedPreferences.getInt("id_uniq", -1); // -1 — значение по умолчанию
+        System.out.println(result);
+        // Проверяем, было ли сохранено значение result
+        if (result != -1) {
+            Log.d("MainActivity", "Сохраненный результат найден: " + result);
+            // Если значение найдено, перенаправляем на экран MainFragment
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    Intent i = new Intent(MainActivity.this, HomeActivity.class);
+                    startActivity(i);
+                    finish();
+                }
+            }, 1000); // Задержка 1 секунда
+        } else {
+            Log.d("MainActivity", "Сохраненный результат отсутствует, перенаправление на экран регистрации");
+            // Если значения нет, перенаправляем на экран регистрации
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    Intent i = new Intent(MainActivity.this, activity_register.class);
+                    startActivity(i);
+                    finish();
+                }
+            }, 1000); // Задержка 1 секунда
+        }
     }
-    }
+}

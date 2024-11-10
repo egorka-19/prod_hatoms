@@ -1,0 +1,10 @@
+<!-- res/drawable/rounded_edittext.xml -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="@color/light_grey" />
+    <corners android:radius="22dp" /> <!-- Скругление углов -->
+    <padding
+        android:left="15dp"
+        android:right="15dp"
+        android:top="15dp"
+        android:bottom="15dp"/>
+</shape>

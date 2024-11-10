@@ -3,110 +3,171 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/white"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="16dp">
+    android:layout_height="match_parent">
 
     <!-- Текстовое поле заголовка -->
-    <TextView
-        android:id="@+id/titleTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Заполните данные"
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        android:textSize="24sp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
 
     <!-- Чекбоксы -->
 
+    <CheckBox
+        android:id="@+id/oneTimeCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:text="Одноразовый"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imageView6" />
+
+    <CheckBox
+        android:id="@+id/complexCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Комплексный"
+        app:layout_constraintTop_toTopOf="@id/oneTimeCheckBox"
+        app:layout_constraintStart_toEndOf="@id/oneTimeCheckBox"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="0dp"/>
     <EditText
         android:id="@+id/name_coast"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
+        android:layout_width="335dp"
+        android:layout_height="65dp"
+        android:layout_marginTop="45dp"
+        android:background="@drawable/rounded_edittext"
         android:hint="Название счета"
         android:inputType="text"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textStyle="normal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/titleTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView6" />
 
     <EditText
         android:id="@+id/full_coast"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="335dp"
+        android:layout_height="65dp"
+        android:layout_marginTop="15dp"
         android:hint="Стоимость счета"
-        app:layout_constraintTop_toBottomOf="@id/name_coast"
-        app:layout_constraintStart_toStartOf="parent"
+        android:background="@drawable/rounded_edittext"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textStyle="normal"
+        android:inputType="numberDecimal"
         app:layout_constraintEnd_toEndOf="parent"
-        android:inputType="numberDecimal"/>
-
-    <Button
-        android:id="@+id/add_member"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Добавить участников"
-        app:layout_constraintTop_toBottomOf="@id/full_coast"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@id/name_coast" />
+
+    <ImageButton
+        android:id="@+id/add_member"
+        android:layout_width="335dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="16dp"
+        android:background="@null"
+        android:scaleType="fitCenter"
+        android:src="@drawable/add_member"
+        android:text="Добавить участников"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/full_coast" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/member"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:visibility="gone"
-        app:layout_constraintTop_toBottomOf="@id/add_member"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/add_member">
 
         <EditText
             android:id="@+id/name_dolg"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_width="335dp"
+            android:layout_height="65dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/rounded_edittext"
             android:hint="Имя участника"
-            app:layout_constraintTop_toTopOf="parent"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="normal"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
             android:id="@+id/dolg"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_width="335dp"
+            android:layout_height="65dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/rounded_edittext"
             android:hint="Задолженность"
-            app:layout_constraintTop_toBottomOf="@id/name_dolg"
-            app:layout_constraintStart_toStartOf="parent"
+            android:inputType="numberDecimal"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="normal"
             app:layout_constraintEnd_toEndOf="parent"
-            android:inputType="numberDecimal"/>
-
-        <Button
-            android:id="@+id/continueButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Продолжить"
-            app:layout_constraintTop_toBottomOf="@id/dolg"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintTop_toBottomOf="@id/name_dolg" />
+
+        <ImageButton
+            android:id="@+id/continueButton"
+            android:layout_width="335dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="10dp"
+            android:background="@null"
+            android:scaleType="fitCenter"
+            android:src="@drawable/add_but"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/dolg" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
         android:id="@+id/member_list"
-        android:layout_width="0dp"
+        android:layout_width="360dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintTop_toBottomOf="@id/member"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
-    <Button
+    <ImageButton
         android:id="@+id/saveButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Сохранить"
+        android:layout_width="255dp"
+        android:layout_height="65dp"
+        android:layout_marginBottom="50dp"
+        android:background="@null"
+        android:scaleType="fitCenter"
+        android:src="@drawable/save_but"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.80"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageButton
+        android:id="@+id/qrButton"
+        android:layout_width="70dp"
+        android:layout_height="65dp"
+        android:layout_marginBottom="50dp"
+        android:background="@null"
+        android:scaleType="fitCenter"
+        android:src="@drawable/qr_scan_but"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.11"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="415dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="-10dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/add_cost_top" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
